@@ -19,6 +19,12 @@ public class Dish {
 	// The number people this dish can serve.
 	private int servings;
 	
+	// The country related to the dish.
+	private String country;
+	
+	// The dish sale price.
+	private float price;
+	
 	// The Dish recipe.
 	private Recipe recipe;
 	
@@ -75,7 +81,39 @@ public class Dish {
 	public void setServings(int servings) {
 		this.servings = servings;
 	}
-	
+
+	/**
+	 * Gets the dish's related country.
+	 * @return the country
+	 */
+	public String getCountry() {
+		return country;
+	}
+
+	/**
+	 * Sets the related country for the dish.
+	 * @param country the country to set
+	 */
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	/**
+	 * Gets the dish's sale price.
+	 * @return the price
+	 */
+	public float getPrice() {
+		return price;
+	}
+
+	/**
+	 * Sets the sale price for the dish.
+	 * @param price the price to set
+	 */
+	public void setPrice(float price) {
+		this.price = price;
+	}
+
 	/** Gets the dish's recipe.
 	 * @return the dish's recipe
 	 */
@@ -95,6 +133,8 @@ public class Dish {
 	 * This method provides the dish information in the following format.
 	 *      Name       : The name of the dish.
 	 *      Serves     : The number of servings.
+	 *      Country    : The related country.
+	 *      Price      : The sale price. 
 	 *      Description: The dish's description.
 	 *      Ingredients: The dish's ingredients.
 	 *      Preparation: The dish's preparation.
@@ -104,8 +144,10 @@ public class Dish {
 		return String.format("%nHere is the dish you just created!%n"
 				+ "Name       : %s%n"
 				+ "Serves     : %d%n"
+				+ "Country    : %s%n"
+				+ "Price      : $%.2f%n"
 				+ "Description: %s%n"
 				+ "Ingredients: %s%n"
-				+ "Preparation: %s%n%n", name, servings, description, recipe.getIngredients(), recipe.getPreparation());
+				+ "Preparation: %s%n%n", name, servings, country, price, description, recipe.getIngredients(), recipe.getPreparation());
 	}
 }

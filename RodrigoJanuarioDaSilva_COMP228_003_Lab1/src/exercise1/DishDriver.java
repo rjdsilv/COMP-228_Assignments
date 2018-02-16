@@ -31,28 +31,33 @@ public class DishDriver {
 			
 			if (YES.equalsIgnoreCase(userResponse)) {
 				Dish dish = new Dish();
-	
+
 				// Getting the dish's name.
 				System.out.println("Please, provide the dish's name:");
 				dish.setName(scanner.nextLine());
-	
-				// Getting the dish's description.
-				System.out.println("Please, provide the dish's description:");
-				dish.setDescription(scanner.nextLine());
-	
+
 				// Getting the dish's number of servings.
 				System.out.println("Please, provide the dish's number of servings:");
 				dish.setServings(scanner.nextInt());
-				
-				// Getting the remaining line break if it's there
-				if (scanner.hasNextLine()) {
-					scanner.nextLine();
-				}
-				
+				scanner.nextLine();
+
+				// Getting the dish's related country.
+				System.out.println("Please, provide the dish's country:");
+				dish.setCountry(scanner.nextLine());
+
+				// Getting the dish's sale price.
+				System.out.println("Please, provide the dish's sale price:");
+				dish.setPrice(scanner.nextFloat());
+				scanner.nextLine();
+
+				// Getting the dish's description.
+				System.out.println("Please, provide the dish's description:");
+				dish.setDescription(scanner.nextLine());
+
 				System.out.print(dish.getDishInformation());
 			}
 		}
-		
+
 		System.out.println("As you decided you no longer want to create dishes, the program is exiting!");
 		scanner.close();
 	}
