@@ -25,7 +25,7 @@ public class Door {
 	public static final class Material {
 		public final static String METAL = "metal";
 		public final static String WOOD = "wood";
-		public final static String PLATIC = "plastic";
+		public final static String PLASTIC = "plastic";
 	}
 
 	/**

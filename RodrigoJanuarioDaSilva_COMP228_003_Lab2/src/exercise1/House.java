@@ -45,13 +45,18 @@ public class House {
 	}
 	
 	/**
-	 * Remove all the rooms that have the type passed as parameter.
+	 * Remove the first the room that have the same type the type passed as parameter.
 	 * 
 	 * @param type The room type to be removed.
 	 */
 	public void removeRoom(RoomType type) {
 		if (null != type) {
-			rooms.removeIf(filter -> type.equals(filter.getType()));
+			for (int i = 0; i < rooms.size(); i++) {
+				if (type.equals(rooms.get(i).getType())) {
+					rooms.remove(i);
+					break;
+				}
+			}
 		} else {
 			System.err.println("########## ERROR: The type to be removed cannot be null!!!");
 		}
