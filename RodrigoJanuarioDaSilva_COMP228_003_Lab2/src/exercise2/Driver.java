@@ -102,9 +102,8 @@ public final class Driver {
 		if (deletedRoom) {
 			System.out.println("#####               A F T E R   D E L E T I O N               #####");
 		}
-		printHeaderSeparator();
 
-		// Prints the information about the house rooms.
+		printHeaderSeparator();
 		printHouseInfo(rooms);
 	}
 

@@ -45,7 +45,7 @@ public class House {
 	}
 	
 	/**
-	 * Remove the first the room that have the same type the type passed as parameter.
+	 * Removes the first the room that have the same type the type passed as parameter.
 	 * 
 	 * @param type The room type to be removed.
 	 */
@@ -84,8 +84,10 @@ public class House {
 	
 	/**
 	 * Returns all the house's rooms in a way that it cannot be modified by the caller.
+	 * I am returning a list so we can return it as a unmodifiable object to external world. It means that
+	 * the list can't be changed outside the class.
 	 * 
-	 * @return All house's rooms.
+	 * @return All house's rooms unmodifiable.
 	 */
 	public List<Room> getAllRooms() {
 		return Collections.unmodifiableList(rooms);
