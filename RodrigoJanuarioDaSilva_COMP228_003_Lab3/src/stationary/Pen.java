@@ -15,12 +15,13 @@ public final class Pen extends AbstractWritable implements Writable {
 	 * Enumeration that will contain the valid pen types.
 	 */
 	public static enum Type {
-		QUILL("Quill"),
-		BALLPOINT("Ball Point"),
-		MARKER("Marker"),
-		GEL_PEN("Gel Pen"),
-		SPACE_PEN("Space Pen");
+		QUILL("PEN-QL8Y", "Quill"),
+		BALLPOINT("PEN-BP9K", "Ball Point"),
+		MARKER("PEN-MK5S", "Marker"),
+		GEL_PEN("PEN-GP0H", "Gel Pen"),
+		SPACE_PEN("PEN-SP8N", "Space Pen");
 
+		private String model;
 		private String name;
 
 		/**
@@ -28,16 +29,26 @@ public final class Pen extends AbstractWritable implements Writable {
 		 * 
 		 * @param name The type's name.
 		 */
-		private Type(String name) {
+		private Type(String model, String name) {
+			this.model = model;
 			this.name = name;
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see java.lang.Enum#toString()
+		/**
+		 * Gets the pen type's model.
+		 * 
+		 * @return The pen type's model.
 		 */
-		@Override
-		public String toString() {
+		public String getModel() {
+			return model;
+		}
+
+		/**
+		 * Gets the pen type's name.
+		 * 
+		 * @return The pen type's name.
+		 */
+		public String getName() {
 			return name;
 		}
 	}
@@ -77,6 +88,6 @@ public final class Pen extends AbstractWritable implements Writable {
 	 */
 	@Override
 	public String toString() {
-		return String.format("Pen model %s of type %s.", modelNumber, type);
+		return String.format("Pen model %s of type %s.", modelNumber, type.getName());
 	}
 }

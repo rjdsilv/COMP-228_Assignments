@@ -15,29 +15,41 @@ public final class Crayon extends AbstractWritable implements Erasable {
 	 * Enumeration that will contain the valid crayon colors.
 	 */
 	public static enum Color {
-		BLUE("Blue"),
-		GREEN("Green"),
-		RED("Red"),
-		BLACK("Black"),
-		PINK("Pink");
+		BLUE("CYN-BL6G", "Blue"),
+		GREEN("CYN-GR2D", "Green"),
+		RED("CYN-RD4V", "Red"),
+		BLACK("CYN-BK0I", "Black"),
+		PINK("CYN-PK3B", "Pink");
 
+		private String model;
 		private String name;
 		
 		/**
 		 * Creates a new Crayon Color.
 		 * 
+		 * @param name The color's model.
 		 * @param name The color's name.
 		 */
-		private Color(String name) {
+		private Color(String model, String name) {
+			this.model = model;
 			this.name = name;
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see java.lang.Enum#toString()
+		/**
+		 * Gets the crayon color's model.
+		 * 
+		 * @return The crayon color's model.
 		 */
-		@Override
-		public String toString() {
+		public String getModel() {
+			return model;
+		}
+
+		/**
+		 * Gets the crayon color's name.
+		 * 
+		 * @return The crayon color's name.
+		 */
+		public String getName() {
 			return name;
 		}
 	}
@@ -86,6 +98,6 @@ public final class Crayon extends AbstractWritable implements Erasable {
 	 */
 	@Override
 	public String toString() {
-		return String.format("Crayon model %s of color %s.", modelNumber, color);
+		return String.format("Crayon model %s of color %s.", modelNumber, color.getName());
 	}
 }

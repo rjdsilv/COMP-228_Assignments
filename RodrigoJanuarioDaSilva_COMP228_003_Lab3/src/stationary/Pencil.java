@@ -15,30 +15,42 @@ public final class Pencil extends AbstractWritable implements Erasable {
 	 * Enumeration that will contain the valid pencil hardnesses.
 	 */
 	public static enum Hardness {
-		_6HB("6HB"),
-		_4HB("4HB"),
-		_2HB("2HB"),
-		_2B("2B"),
-		_4B("4B"),
-		_6B("6B");
+		_6HB("PCL-6H9P", "6HB"),
+		_4HB("PCL-4H7X", "4HB"),
+		_2HB("PCL-2H0T", "2HB"),
+		_2B("PCL-2B5W", "2B"),
+		_4B("PCL-4B2Z", "4B"),
+		_6B("PCL-6B8M", "6B");
 		
+		private String model;
 		private String name;
 
 		/**
-		 * Creates a new Crayon Color.
+		 * Creates a new Pencil Hardness.
 		 * 
-		 * @param name The color's name.
+		 * @param name The hardness' model.
+		 * @param name The hardness' name.
 		 */
-		private Hardness(String name) {
+		private Hardness(String model, String name) {
+			this.model = model;
 			this.name = name;
 		}
-		
-		/*
-		 * (non-Javadoc)
-		 * @see java.lang.Enum#toString()
+
+		/**
+		 * Gets the pencil hardness' model.
+		 * 
+		 * @return The pencil hardness' model.
 		 */
-		@Override
-		public String toString() {
+		public String getModel() {
+			return model;
+		}
+
+		/**
+		 * Gets the pencil hardness' name.
+		 * 
+		 * @return pencil hardness' name.
+		 */
+		public String getName() {
 			return name;
 		}
 	}
@@ -87,6 +99,6 @@ public final class Pencil extends AbstractWritable implements Erasable {
 	 */
 	@Override
 	public String toString() {
-		return String.format("Pencil model %s of hardness %s.", modelNumber, hardness);
+		return String.format("Pencil model %s of hardness %s.", modelNumber, hardness.getName());
 	}
 }

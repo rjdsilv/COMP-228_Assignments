@@ -9,6 +9,16 @@ package stationary;
  * @author Rodrigo Januario da Silva
  */
 public class Eraser extends Stationary {
+	public static final String MODELS[] = {
+			"ERS-8Y9K",
+			"ERS-5W1F",
+			"ERS-4R4K",
+			"ERS-9G3R",
+			"ERS-0L7T",
+			"ERS-2K0P",
+			"ERS-3V1J",
+	};
+
 	/**
 	 * @param modelNumber
 	 */
