@@ -18,12 +18,16 @@ import stationary.Pencil.Hardness;
  */
 public class Manager {
 	/**
-	 * This method will display the contents on the desk. I am using desk class instead of
-	 * a list of Stationaries because the desk class has logic to deal with capacity.
+	 * This method will display the contents on the desk. I am using desk class
+	 * instead of a list of Stationaries because the desk class has logic to deal
+	 * with capacity.
 	 * 
 	 * @param desk The desk to be managed.
 	 */
 	static void whatIsOnTheDesk(Desk desk) {
+		// Here we have the concept of Polymorphism being demonstrated for Stationaries.
+		// The correct method
+		// describe is being called in each of the objects.
 		desk.getItemList().forEach(item -> System.out.println(item.describe()));
 	}
 
@@ -34,12 +38,59 @@ public class Manager {
 	 */
 	static void eraseAllThatsRequired(Desk desk) {
 		desk.getItemList().forEach(item -> {
+			// Here we have the concept of Polymorphism demonstrated, as for each erasable
+			// object, the correct erase
+			// method is being called in each of the different types of Erasable objects.
 			if (item instanceof Erasable) {
 				((Erasable) item).erase();
 			}
 		});
 	}
-	
+
+	/**
+	 * Method to display all the messages written on the desk.
+	 * 
+	 * @param desk The desk to be used.
+	 */
+	static void displayMessages(Desk desk) {
+		System.out.println(String.format("\nThis is what you have written:"));
+		desk.getItemList().forEach(item -> {
+			if (item instanceof Writable) {
+				final Writable writable = (Writable) item;
+
+				if (null != writable.getText() && !"".equals(writable.getText().trim())) {
+					System.out.println(String.format("%s - %s\r\n%s", 
+							item.getModelNumber(),
+							item.getClass().getSimpleName(),
+							((Writable) item).getText())
+					);
+				}
+			}
+		});
+	}
+
+	/**
+	 * Writes and stores the messages written by the user with each writable Stationary.
+	 * 
+	 * @param desk The desk containing the items to be used by the user.
+	 */
+	static void askUserForMessages(Desk desk) {
+		desk.getItemList().forEach(item -> {
+			if (item instanceof Writable) {
+				String userResponse = JOptionPane.showInputDialog(
+						null,
+						String.format("You are now holding a %s. What message would you like to write with it?", item.getClass().getSimpleName()),
+						"User Input",
+						JOptionPane.QUESTION_MESSAGE
+				);
+
+				if (null != userResponse && !"".equals(userResponse.trim())) {
+					((Writable) item).write(userResponse);
+				}
+			}
+		});
+	}
+
 	/**
 	 * Method that will ask for the user to choose the items to be on the desk.
 	 * 
@@ -48,7 +99,12 @@ public class Manager {
 	static void askUserToChooseTheItemsToBeOnTheDesk(Desk desk) {
 		// The scanner will be closed automatically after this try-with-resources.
 		try (Scanner scanner = new Scanner(System.in)) {
-			System.out.println("First, let's choose what items will be on the desk. A numbered list for each item will be presented. Choose by the item number");
+			System.out.println(
+					"First, let's choose what items will be on the desk. A numbered list for each item will be presented. Choose by the item number");
+
+			// Here we have the concept of Polymorphism demonstrated. The desk is expecting
+			// a Stationary that is
+			// assuming different forms in each of the lines being added.
 			desk.addItem(choosePen(scanner));
 			desk.addItem(choosePencil(scanner));
 			desk.addItem(chooseCrayon(scanner));
@@ -56,9 +112,10 @@ public class Manager {
 			System.out.println();
 		}
 	}
-	
+
 	/**
-	 * Method that will ask for the user to choose a valid pen to be displayed on the desk.
+	 * Method that will ask for the user to choose a valid pen to be displayed on
+	 * the desk.
 	 * 
 	 * @param scanner The scanner to read the user's input.
 	 * @return The user's pen of choice.
@@ -67,7 +124,8 @@ public class Manager {
 		// Displaying the pens to be selected.
 		System.out.println("\nSelect the pen to be on the desk:");
 		for (int i = 0; i < Type.values().length; i++) {
-			System.out.println(String.format("\t%d) Model Number %s - %s", i + 1, Type.values()[i].getModel(), Type.values()[i].getName()));
+			System.out.println(String.format("\t%d) Model Number %s - %s", i + 1, Type.values()[i].getModel(),
+					Type.values()[i].getName()));
 		}
 
 		int itemNumber;
@@ -75,23 +133,21 @@ public class Manager {
 			System.out.print("Pen Number: ");
 			itemNumber = scanner.nextInt();
 			scanner.nextLine(); // Removes the line feed from the input.
-			
+
 			if ((itemNumber <= 0) || (itemNumber > Type.values().length)) {
-				JOptionPane.showMessageDialog(
-						null,
+				JOptionPane.showMessageDialog(null,
 						String.format("The pen number %d is invalid. Please, select a valid pen number.", itemNumber),
-						"Invalid Pen Selected",
-						JOptionPane.WARNING_MESSAGE
-				);
+						"Invalid Pen Selected", JOptionPane.WARNING_MESSAGE);
 			}
 		} while ((itemNumber <= 0) || (itemNumber > Type.values().length));
 
 		final Type selectedType = Type.values()[itemNumber - 1];
 		return new Pen(selectedType.getModel(), selectedType);
 	}
-	
+
 	/**
-	 * Method that will ask for the user to choose a valid pencil to be displayed on the desk.
+	 * Method that will ask for the user to choose a valid pencil to be displayed on
+	 * the desk.
 	 * 
 	 * @param scanner The scanner to read the user's input.
 	 * @return The user's pencil of choice.
@@ -100,7 +156,8 @@ public class Manager {
 		// Displaying the pencils to be selected.
 		System.out.println("\nSelect the pencil to be on the desk:");
 		for (int i = 0; i < Hardness.values().length; i++) {
-			System.out.println(String.format("\t%d) Model Number %s - %s", i + 1, Hardness.values()[i].getModel(), Hardness.values()[i].getName()));
+			System.out.println(String.format("\t%d) Model Number %s - %s", i + 1, Hardness.values()[i].getModel(),
+					Hardness.values()[i].getName()));
 		}
 
 		int itemNumber;
@@ -108,14 +165,11 @@ public class Manager {
 			System.out.print("Pencil Number: ");
 			itemNumber = scanner.nextInt();
 			scanner.nextLine(); // Removes the line feed from the input.
-			
+
 			if ((itemNumber <= 0) || (itemNumber > Hardness.values().length)) {
-				JOptionPane.showMessageDialog(
-						null,
-						String.format("The pencil number %d is invalid. Please, select a valid pencil number.", itemNumber),
-						"Invalid Pencil Selected",
-						JOptionPane.WARNING_MESSAGE
-				);
+				JOptionPane.showMessageDialog(null, String
+						.format("The pencil number %d is invalid. Please, select a valid pencil number.", itemNumber),
+						"Invalid Pencil Selected", JOptionPane.WARNING_MESSAGE);
 			}
 		} while ((itemNumber <= 0) || (itemNumber > Hardness.values().length));
 
@@ -124,7 +178,8 @@ public class Manager {
 	}
 
 	/**
-	 * Method that will ask for the user to choose a valid crayon to be displayed on the desk.
+	 * Method that will ask for the user to choose a valid crayon to be displayed on
+	 * the desk.
 	 * 
 	 * @param scanner The scanner to read the user's input.
 	 * @return The user's crayon of choice.
@@ -133,7 +188,8 @@ public class Manager {
 		// Displaying the crayons to be selected.
 		System.out.println("\nSelect the crayon to be on the desk:");
 		for (int i = 0; i < Color.values().length; i++) {
-			System.out.println(String.format("\t%d) Model Number %s - %s", i + 1, Color.values()[i].getModel(), Color.values()[i].getName()));
+			System.out.println(String.format("\t%d) Model Number %s - %s", i + 1, Color.values()[i].getModel(),
+					Color.values()[i].getName()));
 		}
 
 		int itemNumber;
@@ -141,14 +197,11 @@ public class Manager {
 			System.out.print("Crayon Number: ");
 			itemNumber = scanner.nextInt();
 			scanner.nextLine(); // Removes the line feed from the input.
-			
+
 			if ((itemNumber <= 0) || (itemNumber > Color.values().length)) {
-				JOptionPane.showMessageDialog(
-						null,
-						String.format("The pencil number %d is invalid. Please, select a valid pencil number.", itemNumber),
-						"Invalid Pencil Selected",
-						JOptionPane.WARNING_MESSAGE
-				);
+				JOptionPane.showMessageDialog(null, String
+						.format("The pencil number %d is invalid. Please, select a valid pencil number.", itemNumber),
+						"Invalid Pencil Selected", JOptionPane.WARNING_MESSAGE);
 			}
 		} while ((itemNumber <= 0) || (itemNumber > Color.values().length));
 
@@ -157,7 +210,8 @@ public class Manager {
 	}
 
 	/**
-	 * Method that will ask for the user to choose a valid eraser to be displayed on the desk.
+	 * Method that will ask for the user to choose a valid eraser to be displayed on
+	 * the desk.
 	 * 
 	 * @param scanner The scanner to read the user's input.
 	 * @return The user's eraser of choice.
@@ -174,14 +228,11 @@ public class Manager {
 			System.out.print("Eraser Number: ");
 			itemNumber = scanner.nextInt();
 			scanner.nextLine(); // Removes the line feed from the input.
-			
+
 			if ((itemNumber <= 0) || (itemNumber > Eraser.MODELS.length)) {
-				JOptionPane.showMessageDialog(
-						null,
-						String.format("The pencil number %d is invalid. Please, select a valid pencil number.", itemNumber),
-						"Invalid Pencil Selected",
-						JOptionPane.WARNING_MESSAGE
-				);
+				JOptionPane.showMessageDialog(null, String
+						.format("The pencil number %d is invalid. Please, select a valid pencil number.", itemNumber),
+						"Invalid Pencil Selected", JOptionPane.WARNING_MESSAGE);
 			}
 		} while ((itemNumber <= 0) || (itemNumber > Eraser.MODELS.length));
 

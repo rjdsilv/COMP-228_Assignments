@@ -27,7 +27,7 @@ public abstract class AbstractWritable extends Stationary implements Writable {
 	 */
 	@Override
 	public void write(String text) {
-		this.text += text;
+		this.text += text + "\r\n";
 	}
 
 	/*
