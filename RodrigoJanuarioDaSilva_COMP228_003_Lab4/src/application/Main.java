@@ -14,7 +14,7 @@ public class Main extends Application {
 
 			// Setting the window properties.
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("Doctor's office");
+			primaryStage.setTitle("Appointment Management App");
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
