@@ -26,7 +26,7 @@ public class Driver {
 				System.out.println("Text remaining after erasing:");
 				Manager.displayMessages(desk);
 			}
-			
+
 			continueWriting = JOptionPane.showConfirmDialog(
 					null, 
 					"Do you want to continue writing?", 
@@ -36,7 +36,7 @@ public class Driver {
 			);
 		} while (JOptionPane.YES_OPTION == continueWriting);
 		
-		System.out.println("You chose to stop writing.");
+		System.out.println(Stationary.getStopWritingChoiceText());
 		Manager.displayMessages(desk);
 	}
 }

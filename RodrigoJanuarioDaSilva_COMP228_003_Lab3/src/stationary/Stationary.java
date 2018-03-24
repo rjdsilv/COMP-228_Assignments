@@ -29,9 +29,13 @@ public abstract class Stationary {
 		return modelNumber;
 	}
 
-	// TODO Check with the teacher if this method is really necessary!!!
-	public static String doSomething() {
-		return "Doing something now";
+	/**
+	 * Changing the doSomething method for getStopWritingChoiceText method to be called in the driver class.
+	 *  
+	 * @return The text You chose to stop writing!
+	 */
+	public static String getStopWritingChoiceText() {
+		return "You chose to stop writing!";
 	}
 
 	/**
