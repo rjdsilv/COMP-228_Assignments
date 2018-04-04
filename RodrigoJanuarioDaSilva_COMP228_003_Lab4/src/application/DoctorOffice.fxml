@@ -70,7 +70,7 @@
             </ListView>
             <Button fx:id="submitButton" mnemonicParsing="false" onAction="#handleSubmit" prefHeight="31.0" prefWidth="204.0" text="Submit" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="10" />
             <Label text="Office Location: " GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <ComboBox fx:id="officeLocationComboBox" prefHeight="31.0" prefWidth="390.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+            <ComboBox fx:id="officeLocationComboBox" prefHeight="31.0" prefWidth="390.0" promptText="-- Select --" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="7" />
             <Label text="Patient Age: " GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Slider fx:id="ageSlider" max="85.0" min="14.0" showTickLabels="true" showTickMarks="true" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
             <TextField fx:id="ageTextField" editable="false" GridPane.columnIndex="4" GridPane.rowIndex="2" />

@@ -84,7 +84,6 @@ public class DoctorOfficeController implements Initializable {
 	private ObservableList<String> locations = FXCollections.observableArrayList();
 
 	// The user selected values.
-
 	private AppointmentData data = new AppointmentData();
 
 	@Override
