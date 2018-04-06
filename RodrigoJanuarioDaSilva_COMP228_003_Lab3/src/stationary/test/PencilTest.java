@@ -20,7 +20,7 @@ class PencilTest {
 	void testErase() {
 		final Pencil pencil = new Pencil("PCL-K6HBL", Hardness._6HB);
 		pencil.write("This is a sample text");
-		assertEquals("This is a sample text", pencil.getText());
+		assertEquals("This is a sample text\r\n", pencil.getText());
 		pencil.erase();
 		assertEquals("", pencil.getText());
 	}
@@ -32,6 +32,6 @@ class PencilTest {
 	void testWrite() {
 		final Pencil pencil = new Pencil("PCL-K6HBL", Hardness._6HB);
 		pencil.write("This is a sample text");
-		assertEquals("This is a sample text", pencil.getText());
+		assertEquals("This is a sample text\r\n", pencil.getText());
 	}
 }
