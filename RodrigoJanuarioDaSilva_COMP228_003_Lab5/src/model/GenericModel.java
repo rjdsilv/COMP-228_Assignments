@@ -7,7 +7,14 @@ package model;
  * @version 1.0.0
  */
 public abstract class GenericModel {
+	// Properties declaration.
 	protected int id;
+
+	/**
+	 * Default Constructor.
+	 */
+	protected GenericModel() {
+	}
 
 	/**
 	 * Constructor for the Model.
@@ -25,5 +32,14 @@ public abstract class GenericModel {
 	 */
 	public int getId() {
 		return id;
+	}
+
+	/**
+	 * Setter for the id property.
+	 * 
+	 * @param id The id to be set.
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 }

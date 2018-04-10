@@ -35,7 +35,7 @@ public interface GenericDao<M extends GenericModel> {
 	 * Inserts the given model object into the database.
 	 * 
 	 * @param model The model to be inserted.
-	 * @return The inserted model with its generated ID.
+	 * @return The inserted model with its generated ID or null if the insert fails.
 	 */
 	public M insert(M model);
 
@@ -51,7 +51,7 @@ public interface GenericDao<M extends GenericModel> {
 	 * Deletes the given object from the database.
 	 * 
 	 * @param model The model object to be deleted.
-	 * @return <b>true</b> if the object is successfully deleted. <b>false</b> otherwise.
+	 * @return <b>true</b> if an object to delete was found. <b>false</b> otherwise.
 	 */
 	public boolean delete(M model);
 }

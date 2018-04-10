@@ -10,13 +10,30 @@ package model;
  * @version 1.0.0
  */
 public final class Hospital extends GenericModel {
+	// Constant declarations.
+	public static final String ID_COL = "HOSPITALID";
+	public static final String NAME_COL = "NAME";
+	public static final String RATING_COL = "RATING";
+	public static final String ADDR_COL = "ADDRESS";
+	public static final String FAX_COL = "FAXNUMBER";
+	public static final String PHONE_COL = "PHONENUMBER";
+	public static final String EMAIL_COL = "EMAIL";
+
+	// Properties declaration.
 	private String name;
 	private int rating;
 	private String address;
 	private String faxNumber;
 	private String phoneNumber;
 	private String email;
-	
+
+	/**
+	 * Default Constructor.
+	 */
+	public Hospital() {
+		super();
+	}
+
 	/**
 	 * Constructor for the Hospital class.
 	 * 
@@ -162,5 +179,15 @@ public final class Hospital extends GenericModel {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "{Hospital: {id='" + id + "', name='" + name + "', rating='" + rating + "', address='" + address + "', faxNumber='" + faxNumber
+				+ "', phoneNumber='" + phoneNumber + "', email='" + email + "'}}";
 	}
 }
