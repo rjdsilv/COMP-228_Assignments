@@ -18,6 +18,17 @@
 *.tar.gz
 *.rar
 
+# Derby files.
+*.dat
+*.lck
+*.ctrl
+*.txt
+service.properties
+
+# Document Files.
+*.doc
+*.docx
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 .project
