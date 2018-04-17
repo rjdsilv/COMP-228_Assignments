@@ -91,4 +91,10 @@ class HospitalDaoImplTest {
 		final Executable findHospital = () -> hospitalDao.findById(deleted.getId());
 		assertThrows(ObjectNotFoundException.class, findHospital);
 	}
+
+	@Test
+	void testFindByLastName() {
+		assertTrue(hospitalDao.findByLastName("Hospital").size() >= 2);
+		assertTrue(hospitalDao.findByLastName("Mikes Hospital").size() == 1);
+	}
 }

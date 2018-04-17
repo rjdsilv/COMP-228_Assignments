@@ -23,6 +23,7 @@ import model.exception.ObjectNotFoundException;
  */
 public abstract class GenericDaoImpl<M extends GenericModel> implements GenericDao<M> {
 	// Constant declarations.
+	protected static final String DERBY_DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
 	protected static final String CNN_STR = "jdbc:derby:database/hospitals";
 	protected static final String CNN_USER = "liliya";
 	protected static final String CNN_PWD = "liliya";
@@ -36,7 +37,7 @@ public abstract class GenericDaoImpl<M extends GenericModel> implements GenericD
 	 * @throws Exception If any error occurs when loading the Derby driver.
 	 */
 	protected GenericDaoImpl() throws Exception {
-		Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+		Class.forName(DERBY_DRIVER);
 	}
 
 	/**

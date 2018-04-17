@@ -8,6 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import model.Hospital;
 
@@ -118,10 +121,39 @@ public final class HospitalDaoImpl extends GenericDaoImpl<Hospital> implements H
 
 	/*
 	 * (non-Javadoc)
+	 * @see dao.HospitalDao#findByLastName(java.lang.String)
+	 */
+	@Override
+	public List<Hospital> findByLastName(String lastName) {
+		final List<Hospital> objectList = new ArrayList<>();
+
+		try (Connection cnn = getConnection()) {
+			final String sql = "SELECT * FROM " + tableName + " WHERE Name LIKE ?";
+
+			try (PreparedStatement stmt = cnn.prepareStatement(sql)) {
+				stmt.setString(1, "%" + lastName);
+
+				try (ResultSet rs = stmt.executeQuery()) {
+					while (rs.next()) {
+						objectList.add(createModelFromResultSet(rs));
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("An error occurred in findAll method.");
+		}
+
+		return Collections.unmodifiableList(objectList);
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see dao.GenericDaoImpl#getIdColumnName()
 	 */
 	@Override
 	protected String getIdColumnName() {
 		return Hospital.ID_COL;
 	}
+
 }
