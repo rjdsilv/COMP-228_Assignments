@@ -22,12 +22,24 @@ import model.exception.ObjectNotFoundException;
  * @version 1.0.0
  */
 public final class HospitalDaoImpl extends GenericDaoImpl<Hospital> implements HospitalDao {
+	// Singleton instance for the class.
+	private static final HospitalDao INSTANCE = new HospitalDaoImpl();
+
+	/**
+	 * Gets the singleton instance for the class.
+	 * 
+	 * @return The singleton instance for the class.
+	 */
+	public static HospitalDao instance() {
+		return INSTANCE;
+	}
+
 	/**
 	 * Default constructor.
 	 * 
 	 * @throws Exception If any error occur during the object creation.
 	 */
-	protected HospitalDaoImpl() throws Exception {
+	private HospitalDaoImpl() {
 		super();
 		tableName = "Hospitals";
 	}
@@ -55,30 +67,34 @@ public final class HospitalDaoImpl extends GenericDaoImpl<Hospital> implements H
 	@Override
 	public Hospital insert(Hospital model) {
 		try (Connection cnn = getConnection()) {
-			final String sql = "INSERT INTO " + tableName + " (Name, Address, FaxNumber, PhoneNumber, Email, Rating) values (?, ?, ?, ?, ?, ?)";
-
-			try (PreparedStatement stmt = cnn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-				stmt.setString(1, model.getName());
-				stmt.setString(2, model.getAddress());
-				stmt.setString(3, model.getFaxNumber());
-				stmt.setString(4, model.getPhoneNumber());
-				stmt.setString(5, model.getEmail());
-				stmt.setInt(6, model.getRating());
-
-				// Makes sure the insert was successfully performed.
-				if (stmt.executeUpdate() == 1) {
-					try (ResultSet rs = stmt.getGeneratedKeys()) {
-						if (rs.next()) {
-							model.setId(rs.getInt(1));
+			if (null == findByName(model.getName())) {
+				final String insertSql = "INSERT INTO " + tableName + " (Name, Address, FaxNumber, PhoneNumber, Email, Rating) values (?, ?, ?, ?, ?, ?)";
+	
+				try (PreparedStatement stmt = cnn.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS)) {
+					stmt.setString(1, model.getName());
+					stmt.setString(2, model.getAddress());
+					stmt.setString(3, model.getFaxNumber());
+					stmt.setString(4, model.getPhoneNumber());
+					stmt.setString(5, model.getEmail());
+					stmt.setInt(6, model.getRating());
+	
+					// Makes sure the insert was successfully performed.
+					if (stmt.executeUpdate() == 1) {
+						try (ResultSet rs = stmt.getGeneratedKeys()) {
+							if (rs.next()) {
+								model.setId(rs.getInt(1));
+							}
 						}
 					}
+	
+					return model;
 				}
-
-				return model;
+			} else {
+				return null;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("An error occurred in findById method.");
+			System.err.println("An error occurred in insert method.");
 		}
 
 		return null;
@@ -113,7 +129,7 @@ public final class HospitalDaoImpl extends GenericDaoImpl<Hospital> implements H
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.err.println("An error occurred in findById method.");
+				System.err.println("An error occurred in update method.");
 			}
 		}
 
@@ -161,4 +177,32 @@ public final class HospitalDaoImpl extends GenericDaoImpl<Hospital> implements H
 		return Hospital.ID_COL;
 	}
 
+	/**
+	 * Method created to find a hospital by its given name.
+	 * 
+	 * @param name The name to be found.
+	 * @return The hospital found or null if no hospital could be found.
+	 */
+	private Hospital findByName(String name) throws ObjectNotFoundException {
+		Hospital hospital = null;
+
+		try (Connection cnn = getConnection()) {
+			final String sql = "SELECT * FROM " + tableName + " WHERE Name = ?";
+
+			try (PreparedStatement stmt = cnn.prepareStatement(sql)) {
+				stmt.setString(1, name);
+
+				try (ResultSet rs = stmt.executeQuery()) {
+					if (rs.next()) {
+						hospital = createModelFromResultSet(rs);
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("An error occurred in findByName method.");
+		}
+
+		return hospital;
+	}
 }

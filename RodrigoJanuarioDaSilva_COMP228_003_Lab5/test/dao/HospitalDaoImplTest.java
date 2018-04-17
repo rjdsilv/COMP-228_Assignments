@@ -17,10 +17,10 @@ import model.exception.ObjectNotFoundException;
  * @version 1.0.0 *
  */
 class HospitalDaoImplTest {
-	private HospitalDaoImpl hospitalDao;
+	private HospitalDao hospitalDao;
 	
 	HospitalDaoImplTest() throws Exception {
-		hospitalDao = new HospitalDaoImpl();
+		hospitalDao = HospitalDaoImpl.instance();
 	}
 
 	@Test

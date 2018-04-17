@@ -37,13 +37,13 @@
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="findByLastNameButton" layoutX="624.0" layoutY="17.0" mnemonicParsing="false" text="  Find  ">
+                  <Button fx:id="findByLastNameButton" layoutX="624.0" layoutY="17.0" mnemonicParsing="false" onAction="#findByLastNameClick" text="  Find  ">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Button>
                   <Separator layoutX="707.0" layoutY="5.0" orientation="VERTICAL" prefHeight="57.0" prefWidth="3.0" />
-                  <Button fx:id="browseAllButton" layoutX="720.0" layoutY="17.0" mnemonicParsing="false" text="Browse All">
+                  <Button fx:id="browseAllButton" layoutX="721.0" layoutY="17.0" mnemonicParsing="false" onAction="#browseAllClick" text="Browse All">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
@@ -78,17 +78,17 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button fx:id="deleteButton" mnemonicParsing="false" text="Delete Entry" GridPane.halignment="CENTER">
+                              <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteEntryClick" text="Delete Entry" GridPane.halignment="CENTER">
                                  <font>
                                     <Font name="Calibri" size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="updateButton" mnemonicParsing="false" text="Update Entry" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                              <Button fx:id="updateButton" mnemonicParsing="false" onAction="#updateEntryClick" text="Update Entry" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                                  <font>
                                     <Font name="Calibri" size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="addButton" mnemonicParsing="false" text="Add Entry" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                              <Button fx:id="addButton" mnemonicParsing="false" onAction="#addEntryClick" text="Add Entry" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                                  <font>
                                     <Font name="Calibri" size="18.0" />
                                  </font>

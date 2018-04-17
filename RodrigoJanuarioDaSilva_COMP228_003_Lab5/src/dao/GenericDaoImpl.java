@@ -36,8 +36,13 @@ public abstract class GenericDaoImpl<M extends GenericModel> implements GenericD
 	 * 
 	 * @throws Exception If any error occurs when loading the Derby driver.
 	 */
-	protected GenericDaoImpl() throws Exception {
-		Class.forName(DERBY_DRIVER);
+	protected GenericDaoImpl() {
+		try {
+			Class.forName(DERBY_DRIVER);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
 	}
 
 	/**
@@ -122,7 +127,7 @@ public abstract class GenericDaoImpl<M extends GenericModel> implements GenericD
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("An error occurred in findById method.");
+			System.err.println("An error occurred in delete method.");
 		}
 
 		return false;
