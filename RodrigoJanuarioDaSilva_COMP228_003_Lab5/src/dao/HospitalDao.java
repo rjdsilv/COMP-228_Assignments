@@ -6,6 +6,7 @@ package dao;
 import java.util.List;
 
 import model.Hospital;
+import model.exception.ObjectNotFoundException;
 
 /**
  * Interface that will contain all the methods that are specific for dealing with hospitals.
@@ -19,6 +20,7 @@ public interface HospitalDao extends GenericDao<Hospital> {
 	 * 
 	 * @param lastName The partial last name to be found.
 	 * @return The list of hospitals matching the given partial last name string.
+	 * @throws ObjectNotFoundException if no hospital is found with the given last name.
 	 */
-	public List<Hospital> findByLastName(String lastName);
+	public List<Hospital> findByLastName(String lastName) throws ObjectNotFoundException;
 }

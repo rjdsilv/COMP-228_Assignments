@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 import model.Hospital;
+import model.exception.ObjectNotFoundException;
 
 /**
  * DAO class that will handle database operations for the Hospitals table.
@@ -124,8 +125,8 @@ public final class HospitalDaoImpl extends GenericDaoImpl<Hospital> implements H
 	 * @see dao.HospitalDao#findByLastName(java.lang.String)
 	 */
 	@Override
-	public List<Hospital> findByLastName(String lastName) {
-		final List<Hospital> objectList = new ArrayList<>();
+	public List<Hospital> findByLastName(String lastName) throws ObjectNotFoundException {
+		final List<Hospital> hospitalList = new ArrayList<>();
 
 		try (Connection cnn = getConnection()) {
 			final String sql = "SELECT * FROM " + tableName + " WHERE Name LIKE ?";
@@ -135,16 +136,20 @@ public final class HospitalDaoImpl extends GenericDaoImpl<Hospital> implements H
 
 				try (ResultSet rs = stmt.executeQuery()) {
 					while (rs.next()) {
-						objectList.add(createModelFromResultSet(rs));
+						hospitalList.add(createModelFromResultSet(rs));
 					}
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("An error occurred in findAll method.");
+			System.err.println("An error occurred in findByLastName method.");
 		}
 
-		return Collections.unmodifiableList(objectList);
+		if (hospitalList.isEmpty()) {
+			throw new ObjectNotFoundException("No hospitals found with the given Last Name: " + lastName);
+		}
+
+		return Collections.unmodifiableList(hospitalList);
 	}
 
 	/*

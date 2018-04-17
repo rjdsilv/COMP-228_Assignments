@@ -93,8 +93,14 @@ class HospitalDaoImplTest {
 	}
 
 	@Test
-	void testFindByLastName() {
+	void testFindByLastName() throws Exception {
 		assertTrue(hospitalDao.findByLastName("Hospital").size() >= 2);
 		assertTrue(hospitalDao.findByLastName("Mikes Hospital").size() == 1);
+	}
+
+	@Test
+	void testFindByLastNameInexistingHospital() {
+		final Executable codeToExecute = () -> hospitalDao.findByLastName("HospitalNotFound");
+		assertThrows(ObjectNotFoundException.class, codeToExecute);
 	}
 }
