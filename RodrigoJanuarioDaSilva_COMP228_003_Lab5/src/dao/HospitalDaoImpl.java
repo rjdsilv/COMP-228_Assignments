@@ -145,10 +145,10 @@ public final class HospitalDaoImpl extends GenericDaoImpl<Hospital> implements H
 		final List<Hospital> hospitalList = new ArrayList<>();
 
 		try (Connection cnn = getConnection()) {
-			final String sql = "SELECT * FROM " + tableName + " WHERE Name LIKE ?";
+			final String sql = "SELECT * FROM " + tableName + " WHERE UPPER(Name) LIKE ?";
 
 			try (PreparedStatement stmt = cnn.prepareStatement(sql)) {
-				stmt.setString(1, "%" + lastName);
+				stmt.setString(1, "%" + lastName.toUpperCase() + "%");
 
 				try (ResultSet rs = stmt.executeQuery()) {
 					while (rs.next()) {
@@ -187,10 +187,10 @@ public final class HospitalDaoImpl extends GenericDaoImpl<Hospital> implements H
 		Hospital hospital = null;
 
 		try (Connection cnn = getConnection()) {
-			final String sql = "SELECT * FROM " + tableName + " WHERE Name = ?";
+			final String sql = "SELECT * FROM " + tableName + " WHERE UPPER(Name) = ?";
 
 			try (PreparedStatement stmt = cnn.prepareStatement(sql)) {
-				stmt.setString(1, name);
+				stmt.setString(1, name.toUpperCase());
 
 				try (ResultSet rs = stmt.executeQuery()) {
 					if (rs.next()) {
