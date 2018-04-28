@@ -69,7 +69,7 @@ public final class HospitalDaoImpl extends GenericDaoImpl<Hospital> implements H
 		try (Connection cnn = getConnection()) {
 			if (null == findByName(model.getName())) {
 				final String insertSql = "INSERT INTO " + tableName + " (Name, Address, FaxNumber, PhoneNumber, Email, Rating) values (?, ?, ?, ?, ?, ?)";
-	
+
 				try (PreparedStatement stmt = cnn.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS)) {
 					stmt.setString(1, model.getName());
 					stmt.setString(2, model.getAddress());
@@ -86,7 +86,7 @@ public final class HospitalDaoImpl extends GenericDaoImpl<Hospital> implements H
 							}
 						}
 					}
-	
+
 					return model;
 				}
 			} else {
